@@ -52,19 +52,20 @@ namespace RandomFourierFeaturesSharp
 
         public static TensorDataset ToDataset(string path)
         {
-            var image = torchvision.io.read_image(path).to_type(ScalarType.Float32);
-            var shape = image.shape;
+            using var image = torchvision.io.read_image(path);
+            using var imagefloat32 = image.to_type(ScalarType.Float32);
+            var shape = imagefloat32.shape;
             var H = shape[1];
             var W = shape[2];
 
-            var coords = RectangularCoordinates(H, W);
-            image = image.permute(1, 2, 0);
-            image = image / 255.0;
+            using var coords = RectangularCoordinates(H, W);
+            using var perimage = imagefloat32.permute(1, 2, 0);
+            using var scaleimage = perimage / 255.0;
 
-            coords = coords.flatten(0, -2);
-            image = image.flatten(0, -2);
+            using var flattencoords = coords.flatten(0, -2);
+            using var flattenimage = scaleimage.flatten(0, -2);
 
-            return utils.data.TensorDataset(coords, image);
+            return utils.data.TensorDataset(flattencoords, flattenimage);
         }
 
 
