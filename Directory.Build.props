@@ -1,0 +1,25 @@
+﻿<Project>
+
+  <PropertyGroup>
+
+    <TorchSharpVersion>0.105.0</TorchSharpVersion>
+
+    <!-- Standard nuget.org location -->
+    <RestoreSources>https://api.nuget.org/v3/index.json</RestoreSources>
+
+    <!-- TorchSharp local build packages -->
+    <RestoreSources Condition="Exists('$(MSBuildThisFileDirectory)../TorchSharp/bin/packages/Release')">
+        $(RestoreSources);$(MSBuildThisFileDirectory)../TorchSharp/bin/packages/Release;
+    </RestoreSources>
+
+    <!-- TorchSharp local build packages -->
+    <RestoreSources Condition="Exists('$(MSBuildThisFileDirectory)../TorchSharp/bin/packages/Debug')">
+        $(RestoreSources);$(MSBuildThisFileDirectory)../TorchSharp/bin/packages/Debug;
+    </RestoreSources>
+
+
+  </PropertyGroup>
+
+ 
+
+</Project>

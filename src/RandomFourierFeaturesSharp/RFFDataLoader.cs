@@ -13,17 +13,15 @@ namespace RandomFourierFeaturesSharp
         /// <returns>Tensor: tensor of shape :math:`(*\text{size}, \text{len(size)})`</returns>
         public static Tensor RectangularCoordinates(params long[] size)
         {
-            Tensor? ret = null;
             Tensor[]? linspaces = null;
             Tensor[]? coordinates = null;
 
             try
             {
                 static Tensor LinspaceFunc(long nx) => linspace(0.0, 1.0, nx);
-
                 linspaces = Array.ConvertAll(size, LinspaceFunc);
                 coordinates = meshgrid(linspaces, indexing: "ij");
-                ret = stack(coordinates, dim: -1);
+                var ret = stack(coordinates, dim: -1);
                 return ret;
 
             }

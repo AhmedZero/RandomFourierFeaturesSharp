@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RandomFourierFeaturesSharp\RandomFourierFeaturesSharp.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 
@@ -30,9 +26,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\RandomFourierFeaturesSharp\RandomFourierFeaturesSharp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="images\cat.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  
+  <!-- Choose the appropriate TorchSharp bundle with libtorch runtime for our current OS and environment -->
+  <ItemGroup Condition="'$(TESTGPU)' == 'true' AND $([MSBuild]::IsOsPlatform(Linux))">
+    <PackageReference Include="TorchSharp-cuda-linux" Version="$(TorchSharpVersion)" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TESTGPU)' == 'true' AND $([MSBuild]::IsOsPlatform(Windows))">
+    <PackageReference Include="TorchSharp-cuda-windows" Version="$(TorchSharpVersion)" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TESTGPU)' != 'true'">
+    <PackageReference Include="TorchSharp-cpu" Version="$(TorchSharpVersion)" />
   </ItemGroup>
 
 </Project>
