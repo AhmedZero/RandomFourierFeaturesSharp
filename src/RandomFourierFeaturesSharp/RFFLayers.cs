@@ -13,7 +13,7 @@ namespace RandomFourierFeaturesSharp
     {
         public class GaussianEncoding : Module<Tensor,Tensor>
         {
-            private readonly Tensor b;
+            private Tensor b;
 
             public GaussianEncoding(double? sigma = null, double? inputSize = null, double? encodedSize = null, Tensor? b = null) : base(nameof(GaussianEncoding))
             {
@@ -33,6 +33,7 @@ namespace RandomFourierFeaturesSharp
                     }
                     this.b = b;
                 }
+                RegisterComponents();
             }
 
             public override Tensor forward(Tensor x)
@@ -40,18 +41,30 @@ namespace RandomFourierFeaturesSharp
                 return RFFFunctional.GaussianEncoding(x, b);
             }
         }
-        public class BasicEncoding() : Module<Tensor, Tensor>(nameof(BasicEncoding))
+        public class BasicEncoding : Module<Tensor, Tensor>
         {
+            public BasicEncoding() : base(nameof(BasicEncoding))
+            {
+                RegisterComponents();
+            }
+
             public override Tensor forward(Tensor x)
             {
                 return RFFFunctional.BasicEncoding(x);
             }
 
         }
-        public class PositionalEncoding(double sigma, int m) : Module<Tensor, Tensor>(nameof(PositionalEncoding))
+        public class PositionalEncoding : Module<Tensor, Tensor>
         {
-            private readonly double sigma = sigma;
-            private readonly int m = m;
+            private readonly double sigma;
+            private readonly int m;
+
+            public PositionalEncoding(double sigma, int m) : base(nameof(PositionalEncoding))
+            {
+                this.sigma = sigma;
+                this.m = m;
+                RegisterComponents();
+            }
 
             public override Tensor forward(Tensor v)
             {

@@ -1,5 +1,4 @@
 ﻿using TorchSharp;
-using TorchSharp.Modules;
 using static RandomFourierFeaturesSharp.RFFFunctional;
 using static RandomFourierFeaturesSharp.RFFDataLoader;
 
