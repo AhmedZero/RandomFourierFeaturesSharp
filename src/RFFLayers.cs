@@ -32,8 +32,8 @@ namespace RandomFourierFeaturesSharp
                         throw new ArgumentException("Only specify the 'b' argument when using it.");
                     }
                     this.b = b;
+                    register_buffer("b", b);
                 }
-                RegisterComponents();
             }
 
             public override Tensor forward(Tensor x)
@@ -41,30 +41,17 @@ namespace RandomFourierFeaturesSharp
                 return RFFFunctional.GaussianEncoding(x, b);
             }
         }
-        public class BasicEncoding : Module<Tensor, Tensor>
+        public class BasicEncoding() : Module<Tensor, Tensor>(nameof(BasicEncoding))
         {
-            public BasicEncoding() : base(nameof(BasicEncoding))
-            {
-                RegisterComponents();
-            }
-
+         
             public override Tensor forward(Tensor x)
             {
                 return RFFFunctional.BasicEncoding(x);
             }
 
         }
-        public class PositionalEncoding : Module<Tensor, Tensor>
+        public class PositionalEncoding(double sigma, int m) : Module<Tensor, Tensor>(nameof(PositionalEncoding))
         {
-            private readonly double sigma;
-            private readonly int m;
-
-            public PositionalEncoding(double sigma, int m) : base(nameof(PositionalEncoding))
-            {
-                this.sigma = sigma;
-                this.m = m;
-                RegisterComponents();
-            }
 
             public override Tensor forward(Tensor v)
             {
