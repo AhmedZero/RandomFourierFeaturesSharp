@@ -13,7 +13,7 @@ namespace RandomFourierFeaturesSharp
     {
         public class GaussianEncoding : Module<Tensor,Tensor>
         {
-            private Tensor b;
+            public Tensor b;
 
             public GaussianEncoding(double? sigma = null, double? inputSize = null, double? encodedSize = null, Tensor? b = null) : base(nameof(GaussianEncoding))
             {
