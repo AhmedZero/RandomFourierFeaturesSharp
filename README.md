@@ -73,10 +73,10 @@ Pull requests are welcome! If you'd like to contribute:
 If you use this repository, please cite it as:
 
 ```bibtex
-@article{long2021rffcsharp,
+@article{long2025rffcsharp,
   title={Random Fourier Features for C#},
-  author={Your Name},
-  journal={GitHub. Note: https://github.com/your-repo/random-fourier-features-csharp},
+  author={Ahmed Elsayed},
+  journal={GitHub. Note: https://github.com/AhmedZero/RandomFourierFeaturesSharp},
   year={2024}
 }
 ```
