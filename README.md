@@ -1,4 +1,4 @@
-# Random Fourier Features for C#
+# Random Fourier Features for Torchsharp
 
 [![.NET](https://img.shields.io/badge/.NET-C%23-blue)](https://dotnet.microsoft.com/)
 
